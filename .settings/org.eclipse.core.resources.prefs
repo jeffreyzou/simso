@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+encoding//simso/configuration/Configuration.py=utf-8
+encoding//simso/configuration/GenerateConfiguration.py=utf-8
+encoding//simso/configuration/parser.py=utf-8
+encoding//simso/core/Logger.py=utf-8
+encoding//simso/core/Task.py=utf-8

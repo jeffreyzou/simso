@@ -1,0 +1,21 @@
+Metadata-Version: 1.1
+Name: simso
+Version: 0.8.5
+Summary: Simulation of Multiprocessor Real-Time Scheduling with Overheads
+Home-page: http://projects.laas.fr/simso/
+Author: Maxime Cheramy
+Author-email: maxime.cheramy@laas.fr
+License: UNKNOWN
+Download-URL: https://github.com/MaximeCheramy/simso
+Description: SimSo is a scheduling simulator for real-time multiprocessor architectures that
+        takes into account some scheduling overheads (scheduling decisions, context-
+        switches) and the impact of caches through statistical models. Based on a
+        Discrete-Event Simulator, it allows quick simulations and a fast prototyping
+        of scheduling policies using Python.
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Scientific/Engineering
+Classifier: Development Status :: 5 - Production/Stable
