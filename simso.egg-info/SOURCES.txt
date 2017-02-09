@@ -1,5 +1,6 @@
 COPYING.txt
 MANIFEST.in
+setup.cfg
 setup.py
 docs/html/faq.html
 docs/html/genindex.html
@@ -60,6 +61,9 @@ simso/core/etm/ACET.py
 simso/core/etm/AbstractExecutionTimeModel.py
 simso/core/etm/CacheModel.py
 simso/core/etm/FixedPenalty.py
+simso/core/etm/JIDA.py
+simso/core/etm/MEMA.py
+simso/core/etm/OFRP.py
 simso/core/etm/WCET.py
 simso/core/etm/__init__.py
 simso/generator/__init__.py
