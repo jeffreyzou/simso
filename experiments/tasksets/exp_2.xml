@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<simulation cycles_per_ms="1" duration="9004320" etm="ofrp">
+	<sched class="simso.schedulers.RM" overhead="0" overhead_activate="0" overhead_terminate="0"/>
+	<caches memory_access_time="100"/>
+	<processors>
+		<processor cl_overhead="0" cs_overhead="0" id="1" name="CPU 1" speed="1.0"/>
+		<processor cl_overhead="0" cs_overhead="0" id="2" name="CPU 2" speed="1.0"/>
+		<processor cl_overhead="0" cs_overhead="0" id="3" name="CPU 3" speed="1.0"/>
+		<processor cl_overhead="0" cs_overhead="0" id="4" name="CPU 4" speed="1.0"/>
+	</processors>
+	<tasks>
+		<task ACET="0" WCET="14.0" abort_on_miss="yes" activationDate="0" base_cpi="1.0" deadline="480.0" et_stddev="0" id="1" instructions="0" list_activation_dates="" mix="0.5" name="T1" period="480.0" preemption_cost="0" task_type="Periodic"/>
+		<task ACET="0" WCET="18.0" abort_on_miss="yes" activationDate="0" base_cpi="1.0" deadline="156.0" et_stddev="0" id="2" instructions="0" list_activation_dates="" mix="0.5" name="T2" period="156.0" preemption_cost="0" task_type="Periodic"/>
+		<task ACET="0" WCET="180.0" abort_on_miss="yes" activationDate="0" base_cpi="1.0" deadline="468.0" et_stddev="0" id="3" instructions="0" list_activation_dates="" mix="0.5" name="T3" period="468.0" preemption_cost="0" task_type="Periodic"/>
+		<task ACET="0" WCET="24.0" abort_on_miss="yes" activationDate="0" base_cpi="1.0" deadline="169.0" et_stddev="0" id="4" instructions="0" list_activation_dates="" mix="0.5" name="T4" period="169.0" preemption_cost="0" task_type="Periodic"/>
+		<task ACET="0" WCET="33.0" abort_on_miss="yes" activationDate="0" base_cpi="1.0" deadline="480.0" et_stddev="0" id="5" instructions="0" list_activation_dates="" mix="0.5" name="T5" period="480.0" preemption_cost="0" task_type="Periodic"/>
+		<task ACET="0" WCET="87.0" abort_on_miss="yes" activationDate="0" base_cpi="1.0" deadline="260.0" et_stddev="0" id="6" instructions="0" list_activation_dates="" mix="0.5" name="T6" period="260.0" preemption_cost="0" task_type="Periodic"/>
+		<task ACET="0" WCET="301.0" abort_on_miss="yes" activationDate="0" base_cpi="1.0" deadline="333.0" et_stddev="0" id="7" instructions="0" list_activation_dates="" mix="0.5" name="T7" period="333.0" preemption_cost="0" task_type="Periodic"/>
+	</tasks>
+</simulation>
