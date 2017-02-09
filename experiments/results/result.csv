@@ -1,3 +1,0 @@
-taskset id,scheduler,preemptions,sys preempt.,migrations,task_migrations,mean norm laxity,on schedule,timers,aborted jobs,total jobs
-1,<class 'simso.schedulers.RM.RM'>,38,391,55,725,0.66230846020405632,2988,0,1,1493
-2,<class 'simso.schedulers.RM.RM'>,1332,45891,4359,97969,0.73580062960713866,458867,0,0,229430
