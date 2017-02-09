@@ -46,6 +46,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-experiments/tasksets/*.*
-experiments/results/*.*
-
+experiments/tasksets/
+experiments/results/
+experiments/build/
+experiments/dist/
