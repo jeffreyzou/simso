@@ -1,11 +1,10 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # coding=utf-8
 
 import sys
 import os
 from simso.core import Model
 from simso.configuration import Configuration
-from simso.core import ProcEvent
 import simso.generator.task_generator as task_generator
 import csv
 import numpy as np
@@ -68,32 +67,53 @@ class ResultExp(object):
 
 
 def main(argv):
-    print("usage: ./exp [filename1] [filename2] ...")
- 
-#    outdir = input("Output directory: ")
-    outdir = "results"
-    if not os.path.exists(outdir):
-        os.mkdir(outdir)
-
-    result_file = open(outdir + "/result.csv", "w")
-    csv_result = csv.writer(result_file)
-    ResultExp.print_header(csv_result)
+    schedulers = [
+        "schedulers/RM.py", "schedulers/EDF.py", "schedulers/PriD.py",
+        "schedulers/EDF_US.py", "schedulers/EDZL.py", "schedulers/LLF.py",
+        "schedulers/MLLF.py",
+        "schedulers/P_EDF.py", "schedulers/LB_P_EDF.py", "schedulers/EDHS.py",
+        "schedulers/EKG.py", "schedulers/LRE_TL.py", "schedulers/DP_WRAP.py",
+        "schedulers/BF.py", "schedulers/LLREF.py", "schedulers/PD2.py",
+        "schedulers/ER_PD2.py", "schedulers/RUN.py"]
 
     schedulers = [
-#        "simso.schedulers.RM"]
-#        "simso.schedulers.EDF",
-        "simso.schedulers.RM_mono"]
+        "schedulers/EDF.py", "schedulers/EDZL.py", "schedulers/MLLF.py",
+        "schedulers/P_EDF.py", "schedulers/EDHS.py", "schedulers/EKG.py",
+        "schedulers/LRE_TL.py", "schedulers/LLREF.py", "schedulers/ER_PD2.py",
+        "schedulers/RUN.py"]
 
-    if not argv:
-        for i in range (1, 11):
-            argv.append("tasksets/exp_{}.xml".format(str(i)))            
+    schedulers = ["schedulers/EDF.py", "schedulers/EDF2.py"]
+
+    schedulers = ["schedulers/WC_U_EDF.py", "schedulers/U_EDF.py",
+                  "schedulers/RUN.py", "schedulers/WC_RUN.py"]
+    schedulers = ["schedulers/RUN.py", "schedulers/WC_RUN.py",
+                  "/home/max/Documents/These/RTCSA/experiments/schedulers/WC_RUN.py"]
+    schedulers = ["schedulers/WC_U_EDF.py", "schedulers/U_EDF.py",
+                  "/home/max/Documents/These/RTCSA/experiments/schedulers/WC_U_EDF.py"]
+    schedulers = ["schedulers/PD2.py", "schedulers/ER_PD2.py"]
+
+    output = input("Output directory: ")
+    os.mkdir(output)
+
+    wcet_file = open(output + "/wcet.csv", "w")
+    csv_wcet = csv.writer(wcet_file)
+    ResultExp.print_header(csv_wcet)
+
+    acet_file = open(output + "/acet.csv", "w")
+    csv_acet = csv.writer(acet_file)
+    ResultExp.print_header(csv_acet)
+
     if argv:
         for i, f in enumerate(argv):
             configuration = Configuration(f)
             for scheduler_name in schedulers:
-                configuration.scheduler_info.clas = scheduler_name
-#                configuration.check_all()
-                execute(configuration, "ofrp", csv_result, result_file, i+1)
+                print(scheduler_name)
+                configuration.scheduler_info.set_name(scheduler_name,
+                                                      configuration.cur_dir)
+
+                configuration.check_all()
+                execute(configuration, "wcet", csv_wcet, wcet_file, i)
+                execute(configuration, "acet", csv_acet, acet_file, i)
     else:
         # Manual configuration:
         configuration = Configuration()
@@ -115,7 +135,8 @@ def main(argv):
         for i, exp_set in enumerate(task_generator.gen_tasksets(u, periods)):
             for scheduler_name in schedulers:
                 print(scheduler_name)
-                configuration.scheduler_info.clas = scheduler_name
+                configuration.scheduler_info.set_name(scheduler_name,
+                                                      configuration.cur_dir)
                 while configuration.task_info_list:
                     del configuration.task_info_list[0]
                 id_ = 1
@@ -126,22 +147,20 @@ def main(argv):
                         acet=c * .75, et_stddev=c * .1,
                         deadline=p, abort_on_miss=True)
                     id_ += 1
-                
-                configuration.duration = configuration.get_hyperperiod * configuration.cycles_per_ms
 
                 # Check the configuration:
                 configuration.check_all()
 
                 # Save the current exp:
-                configuration.save(outdir + "/exp_{}.xml".format(i+1))
+                configuration.save(output + "/exp_{}.xml".format(i))
 
                 # Execute the simulation:
-                execute(configuration, "ofrp", csv_result, result_file, i+1)
-                #execute(configuration, "wcet", csv_wcet, wcet_file, i+1)
+                execute(configuration, "wcet", csv_wcet, wcet_file, i)
+                execute(configuration, "acet", csv_acet, acet_file, i)
 
 
 def execute(configuration, etm, csv, csv_file, exp_id):
-    scheduler_name = configuration.scheduler_info.get_cls()
+    scheduler_name = configuration.scheduler_info.name
     configuration.etm = etm
     model = Model(configuration)
     try:
